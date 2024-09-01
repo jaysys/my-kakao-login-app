@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 export default async function ProtectedPage() {
   const session = await getServerSession(authOptions);
 
+  console.log(session);
+
   if (!session) {
     // Redirect to the home page if the user is not authenticated
     redirect("/");
@@ -14,7 +16,11 @@ export default async function ProtectedPage() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-2xl font-bold">Protected Page</h1>
-      <p>Welcome, {session.user?.name}</p>
+      <p>
+        가입을 환영합니다!,
+        <br />
+        {session.user?.name}, {session.user?.email}
+      </p>
     </div>
   );
 }
